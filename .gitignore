@@ -1,0 +1,10 @@
+.idea
+Include
+Lib
+Scripts
+tcl
+dev_settings.py
+*.json
+__pycache__/
+.pyc
+*.pyc
