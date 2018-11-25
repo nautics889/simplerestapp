@@ -11,4 +11,5 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ('username', 'email',  'password', 'first_name', 'last_name')
 
     def create(self, validated_data):
+        '''Overriding create method provides hashing of a password'''
         return User.objects.create_user(**validated_data)

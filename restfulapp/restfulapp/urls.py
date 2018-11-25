@@ -15,16 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, re_path, include
-from rest_framework import routers
 from rest_framework_jwt.views import obtain_jwt_token
 
-from accounts_app import views
+from accounts_app import views as acc_view
+from posts_app import views as posts_view
 
-router = routers.DefaultRouter()
-router.register('create', views.CreateUserViewSet)
-
+#It better might be router
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path('^accounts_api/', include(router.urls)),
-    re_path('^authenticate/$', obtain_jwt_token)
+    re_path(r'^create_user/', acc_view.CreateUserViewSet.as_view({'post': 'create'}), name='create_user'),
+    re_path(r'^authenticate/$', obtain_jwt_token),
+    re_path(r'^posts/create_post/$', posts_view.PostViewSet.as_view({'post': 'create'}), name='create_post'),
+    path('posts/', include('posts_app.urls'))
 ]
