@@ -32,7 +32,7 @@ class CreateUserViewSet(viewsets.ModelViewSet):
             request.data['last_name'] = res['person']['name'].get('familyName', '')
         except (TypeError, KeyError):
             #if enrichment is failed, set fields as empty strings
-            request.data['first_name'] = request.data['first_name'] = ''
+            request.data['first_name'] = request.data['last_name'] = ''
 
         #serialize data from request
         serializer = self.get_serializer(data=request.data)
